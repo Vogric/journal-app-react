@@ -3,21 +3,21 @@
   background-color: $primary;
   display: flex;
   justify-content: center;
-  margin: 0;
+  margin: 0px;
   height: 100vh;
-  width: 100vh;
+  width: 100vw;
 }
 
 .auth__box-container {
-  background-color: #fafafa;
+  background-color: white;
   box-shadow: 0px 3px $dark-grey;
-  border-radius: 10px;
+  border-radius: 2px;
   padding: 20px;
   width: 250px;
 }
 
 .auth__title {
-  color: darken($color: $primary, $amount: 15);
+  color: darken($color: $primary, $amount: 20);
   margin-bottom: 20px;
 }
 
@@ -49,9 +49,9 @@
 }
 
 .auth__alert-error {
-  background-color: rgb(255, 0, 0);
+  background-color: red;
   border-radius: 5px;
-  color: #fafafa;
+  color: white;
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
