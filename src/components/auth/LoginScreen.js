@@ -39,10 +39,11 @@ export const LoginScreen = () => {
             <p className="btn-text">
               <b>Sign in with Google</b>
             </p>
-
-            <Link to="/auth/register">Create new account</Link>
           </div>
         </div>
+        <Link to="/auth/register" className="link">
+          Create new account
+        </Link>
       </form>
     </>
   );
