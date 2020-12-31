@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { login } from "../../actions/auth";
+import { loginWithEmailPassword } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch } from "react-redux";
 
@@ -16,7 +16,7 @@ export const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(login(1, "Braian"));
+    dispatch(loginWithEmailPassword(email, password));
   };
 
   return (
