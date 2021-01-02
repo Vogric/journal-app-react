@@ -1,17 +1,52 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
+import validator from "validator";
 
 export const RegisterScreen = () => {
+  const [formValues, handleInputChange] = useForm({
+    name: "braian",
+    email: "blvogric@gmail.com",
+    password: "12345678",
+    password2: "12345678",
+  });
+
+  const { name, email, password, password2 } = formValues;
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    console.log(name, email, password, password2);
+
+    if (isFormValid()) {
+      console.log("Form is correct");
+    }
+  };
+
+  const isFormValid = () => {
+    if (name.trim().length === 0) {
+      console.log("Name is required");
+      return false;
+    } else if (!validator.isEmail(email)) {
+      console.log("Email is not valid");
+      return false;
+    } else if (password != password2 || password.lenght < 8) {
+      console.log("Password must be greater than or equal to 8 characters");
+      return false;
+    }
+    return true;
+  };
   return (
     <>
       <h1 className="auth__title">Register</h1>
-      <form action="">
+      <form onSubmit={handleRegister}>
         <input
           type="text"
           placeholder="Name"
           name="name"
           className="auth__input"
           autoComplete="off"
+          value={name}
+          onChange={handleInputChange}
         />
         <input
           type="email"
@@ -19,12 +54,16 @@ export const RegisterScreen = () => {
           name="email"
           className="auth__input"
           autoComplete="off"
+          onChange={handleInputChange}
+          value={email}
         />
         <input
           type="password"
           placeholder="Password"
           name="password"
           className="auth__input"
+          onChange={handleInputChange}
+          value={password}
         />
 
         <input
@@ -32,6 +71,8 @@ export const RegisterScreen = () => {
           placeholder="Repeat password"
           name="password2"
           className="auth__input"
+          onChange={handleInputChange}
+          value={password2}
         />
         <button className="btn btn-primary btn-block " type="submit">
           Register
