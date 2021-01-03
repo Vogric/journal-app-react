@@ -9,6 +9,18 @@ export const loginWithEmailPassword = () => {
   };
 };
 
+export const registerWithEmailPasswordName = (email, password, name) => {
+  return (dispatch) => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(async ({ user }) => {
+        await user.updateProfile({ displayName: name });
+        dispatch(login(user.uid, user.displayName));
+      });
+  };
+};
+
 export const login = (uid, displayName) => {
   return {
     type: types.login,
