@@ -1,11 +1,17 @@
 import { googleAuthProvider, firebase } from "../firebase/firebaseConfig";
 import { types } from "../types/types";
 
-export const loginWithEmailPassword = () => {
+export const loginWithEmailPassword = (email, password) => {
   return (dispatch) => {
-    setTimeout(() => {
-      dispatch(login(1, "Braian"));
-    }, 1000);
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(({ user }) => {
+        dispatch(login(user.uid, user.displayName));
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 };
 
