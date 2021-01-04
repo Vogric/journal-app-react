@@ -9,7 +9,6 @@ import { registerWithEmailPasswordName } from "../../actions/auth";
 export const RegisterScreen = () => {
   const dispatch = useDispatch();
   const { msgError } = useSelector((state) => state.ui);
-  console.log(msgError);
 
   const [formValues, handleInputChange] = useForm({
     name: "testName",
@@ -22,7 +21,6 @@ export const RegisterScreen = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(name, email, password, password2);
 
     if (isFormValid()) {
       dispatch(registerWithEmailPasswordName(email, password, name));
@@ -36,7 +34,7 @@ export const RegisterScreen = () => {
     } else if (!validator.isEmail(email)) {
       dispatch(setError("Email is not valid"));
       return false;
-    } else if (password !== password2 || password.lenght < 8) {
+    } else if (password !== password2 || password.length < 8) {
       dispatch(
         setError("Password must be greater than or equal to 8 characters")
       );

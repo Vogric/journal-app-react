@@ -2,10 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { googleLogin, loginWithEmailPassword } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import validator from "validator";
+import { removeError, setError } from "../../actions/ui";
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();
+  const { msgError } = useSelector((state) => state.ui);
 
   const [formValues, handleInputChange] = useForm({
     email: "blvogric@gmail.com",
@@ -16,17 +19,36 @@ export const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(loginWithEmailPassword(email, password));
+
+    if (isFormValid()) {
+      console.log(email, password);
+      dispatch(loginWithEmailPassword(email, password));
+    }
   };
 
   const handleGoogleLogin = () => {
     dispatch(googleLogin());
   };
 
+  const isFormValid = () => {
+    if (!validator.isEmail(email)) {
+      dispatch(setError("Email is not valid"));
+      return false;
+    } else if (password.length < 8) {
+      dispatch(
+        setError("Password must be greater than or equal to 8 characters")
+      );
+      return false;
+    }
+    dispatch(removeError);
+    return true;
+  };
+
   return (
     <>
       <h1 className="auth__title">Login</h1>
       <form onSubmit={handleLogin}>
+        {msgError && <div className="auth__alert-error"> {msgError} </div>}
         <input
           type="email"
           placeholder="Mail"
