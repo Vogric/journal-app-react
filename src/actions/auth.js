@@ -21,12 +21,18 @@ export const loginWithEmailPassword = (email, password) => {
 
 export const registerWithEmailPasswordName = (email, password, name) => {
   return (dispatch) => {
+    dispatch(startLoading());
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(async ({ user }) => {
         await user.updateProfile({ displayName: name });
         dispatch(login(user.uid, user.displayName));
+        dispatch(finishLoading());
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch(finishLoading());
       });
   };
 };
