@@ -1,0 +1,22 @@
+.loading__main {
+  align-items: center;
+  background-color: $primary;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.loading__waiting {
+  display: flex;
+  justify-content: space-around;
+  width: 33vw;
+  height: 50vh;
+  padding-top: 10vh;
+  margin-top: 20vh;
+}
+
+.loading__title-1 {
+  color: $light-grey;
+  font-size: 3.4vw;
+}

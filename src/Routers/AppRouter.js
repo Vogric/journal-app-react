@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,17 +10,25 @@ import { AuthRouter } from "./AuthRouter";
 import { firebase } from "../firebase/firebaseConfig";
 import { useDispatch } from "react-redux";
 import { login } from "../actions/auth";
+import { Loading } from "../components/ui/Loading";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
+
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName));
       }
+      setChecking(false);
     });
-  }, [dispatch]);
+  }, [dispatch, setChecking]);
+
+  if (checking) {
+    return <Loading />;
+  }
 
   return (
     <Router>
