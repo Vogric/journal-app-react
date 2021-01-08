@@ -8,11 +8,11 @@ import { removeError, setError } from "../../actions/ui";
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();
-  const { msgError } = useSelector((state) => state.ui);
   const { loading } = useSelector((state) => state.ui);
+  const { msgError } = useSelector((state) => state.ui);
 
   const [formValues, handleInputChange] = useForm({
-    email: "test_email@gmail.com",
+    email: "user@mail.com",
     password: 12345678,
   });
 
@@ -20,7 +20,6 @@ export const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(loginWithEmailPassword(email, password));
 
     if (isFormValid()) {
       dispatch(loginWithEmailPassword(email, password));
