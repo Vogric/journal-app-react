@@ -12,7 +12,7 @@ export const LoginScreen = () => {
   const { loading } = useSelector((state) => state.ui);
 
   const [formValues, handleInputChange] = useForm({
-    email: "blvogric@gmail.com",
+    email: "test_email@gmail.com",
     password: 12345678,
   });
 
@@ -20,9 +20,9 @@ export const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    dispatch(loginWithEmailPassword(email, password));
 
     if (isFormValid()) {
-      console.log(email, password);
       dispatch(loginWithEmailPassword(email, password));
     }
   };

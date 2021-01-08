@@ -5,7 +5,7 @@ import { startLoading, finishLoading } from "./ui";
 export const loginWithEmailPassword = (email, password) => {
   return (dispatch) => {
     dispatch(startLoading());
-    firebase
+    return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(({ user }) => {
@@ -57,3 +57,15 @@ export const googleLogin = () => {
       });
   };
 };
+
+export const startLogout = () => {
+  return async (dispatch) => {
+    await firebase.auth().signOut();
+
+    dispatch(logout());
+  };
+};
+
+export const logout = () => ({
+  type: types.logout,
+});
