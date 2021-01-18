@@ -8,6 +8,8 @@ import { login } from "../actions/auth";
 import { Loading } from "../components/ui/Loading";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
+import { loadNotes } from "../helpers/loadNotes";
+import { setNotes } from "../actions/notes";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -16,10 +18,13 @@ export const AppRouter = () => {
   const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(async (user) => {
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName));
         setIsLogged(true);
+
+        const notes = await loadNotes(user.uid);
+        dispatch(setNotes(notes));
       } else {
         setIsLogged(false);
       }
