@@ -33,7 +33,6 @@ export const Sidebar = () => {
         <i className="far fa-calendar-plus fa-3x" />
         <p className="mt-5">New entry</p>
       </div>
-
       <JournalEntries />
     </aside>
   );
