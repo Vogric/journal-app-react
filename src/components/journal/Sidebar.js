@@ -31,7 +31,7 @@ export const Sidebar = () => {
 
       <div onClick={handleAddNewEntry} className="journal__new-entry">
         <i className="far fa-calendar-plus fa-3x" />
-        <p className="mt-5">New entry</p>
+        <p className="mt-5 mb-5">New entry</p>
       </div>
       <JournalEntries />
     </aside>
