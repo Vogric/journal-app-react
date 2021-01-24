@@ -44,6 +44,7 @@ journal__entries {
 }
 
 .journal__entry {
+  justify-content: space-between;
   background-color: white;
   border-radius: 4px;
   color: $dark-grey;

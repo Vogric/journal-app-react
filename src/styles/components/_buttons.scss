@@ -27,6 +27,18 @@
   }
 }
 
+.btn-danger {
+  background-color: red;
+  border-radius: 4px;
+  color: #fafafa;
+  height: 3rem;
+  transition: color 0.3s ease;
+  &:hover {
+    background-color: darken($color: #ff0000, $amount: 10);
+    color: darken($color: #fafafa, $amount: 10);
+  }
+}
+
 .btn-block {
   width: 100%;
 }
